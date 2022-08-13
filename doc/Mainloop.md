@@ -1,15 +1,16 @@
 # Mainloop
 
-The `Mainloop` module is a deprecated convenience layer for some common event
-loop methods in GLib, such as [`GLib.timeout_add()`][gtimeoutadd].
+The `Mainloop` module is a convenience layer for some common event loop methods
+in GLib, such as [`GLib.timeout_add()`][gtimeoutadd].
 
-This module is no longer recommended, but is documented to help port old code to
-standard GLib methods. Each method below contains links to the corresponding
-GLib method.
+This module is not generally recommended, but is documented for the sake of
+existing code. Each method below contains links to the corresponding GLib
+method for reference.
 
 For an introduction to the GLib event loop, see the
-[Asynchronous Programming Tutorial][].
+[Asynchronous Programming Tutorial][async-tutorial].
 
+[async-tutorial]: https://gjs.guide/guides/gjs/asynchronous-programming.html
 [gtimeoutadd]: https://gjs-docs.gnome.org/glib20/glib.timeout_add
 
 #### Import
@@ -24,7 +25,7 @@ const Mainloop = imports.mainloop
 
 ### Mainloop.idle_add(handler, priority)
 
-> Deprecated: Use [`GLib.idle_add()`][gidleadd] instead
+> See also: [`GLib.idle_add()`][gidleadd]
 
 Type:
 * Static
@@ -46,7 +47,7 @@ If not given, `priority` defaults to `GLib.PRIORITY_DEFAULT_IDLE`.
 
 ### Mainloop.idle_source(handler, priority)
 
-> Deprecated: Use [`GLib.idle_source_new()`][gidlesourcenew] instead
+> See also: [`GLib.idle_source_new()`][gidlesourcenew]
 
 Type:
 * Static
@@ -66,7 +67,7 @@ If not given, `priority` defaults to `GLib.PRIORITY_DEFAULT_IDLE`.
 
 ### Mainloop.quit(name)
 
-> Deprecated: Use [`GLib.MainLoop.quit()`][gmainloopquit] instead
+> See also: [`GLib.MainLoop.quit()`][gmainloopquit]
 
 Type:
 * Static
@@ -85,7 +86,7 @@ if necessary.
 
 ### Mainloop.run(name)
 
-> Deprecated: Use [`GLib.MainLoop.run()`][gmainlooprun] instead
+> See also: [`GLib.MainLoop.run()`][gmainlooprun]
 
 Type:
 * Static
@@ -103,7 +104,7 @@ if necessary.
 
 ### Mainloop.source_remove(id)
 
-> Deprecated: Use [`GLib.Source.remove()`][gsourceremove] instead
+> See also: [`GLib.Source.remove()`][gsourceremove]
 
 Type:
 * Static
@@ -120,7 +121,7 @@ Removes the source with the given ID from the default main context.
 
 ### Mainloop.timeout_add(timeout, handler, priority)
 
-> Deprecated: Use [`GLib.timeout_add()`][gtimeoutadd] instead
+> See also: [`GLib.timeout_add()`][gtimeoutadd]
 
 Type:
 * Static
@@ -144,7 +145,7 @@ not given, `priority` defaults to `GLib.PRIORITY_DEFAULT`.
 
 ### Mainloop.timeout_add_seconds(timeout, handler, priority)
 
-> Deprecated: Use [`GLib.timeout_add_seconds()`][gtimeoutaddseconds] instead
+> See also: [`GLib.timeout_add_seconds()`][gtimeoutaddseconds]
 
 Type:
 * Static
@@ -168,7 +169,7 @@ given, `priority` defaults to `GLib.PRIORITY_DEFAULT`.
 
 ### Mainloop.timeout_source(timeout, handler, priority)
 
-> Deprecated: Use [`GLib.timeout_source_new()`][gtimeoutsourcenew] instead
+> See also: [`GLib.timeout_source_new()`][gtimeoutsourcenew]
 
 Type:
 * Static
@@ -190,8 +191,7 @@ not given, `priority` defaults to `GLib.PRIORITY_DEFAULT`.
 
 ### Mainloop.timeout_seconds_source(timeout, handler, priority)
 
-> Deprecated: Use [`GLib.timeout_source_new_seconds()`][gtimeoutsourcenewseconds]
-> instead
+> See also: [`GLib.timeout_source_new_seconds()`][gtimeoutsourcenewseconds]
 
 Type:
 * Static
