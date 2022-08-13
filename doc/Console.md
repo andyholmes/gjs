@@ -198,6 +198,8 @@ Logs a message with severity equal to
 
 ### console.table(tabularData, options)
 
+> Note: This is an alias for [`console.log()`](#console-log) in GJS
+
 Type:
 * Static
 
