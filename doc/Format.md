@@ -17,7 +17,7 @@ const baz = Math.PI;
 const str1 = `${foo} to ${bar*2} decimal points: ${baz.toFixed(bar*2)}`
 
 // Format.vprintf()
-const str2 = Format.vprintf('%s to %d decimal points: %.2f', foo, bar*2, baz);
+const str2 = Format.vprintf('%s to %d decimal points: %.2f', [foo, bar*2, baz]);
 ```
 
 #### Import
@@ -85,7 +85,7 @@ Example usage:
 Format.printf('A %s %s', 'formatted', 'string');
 ```
 
-### Format.vprintf(fmt, ...args)
+### Format.vprintf(fmt, args)
 
 > Deprecated: Prefer [template literals][template-literals] when possible
 
@@ -94,7 +94,7 @@ Type:
 
 Parameters:
 * fmt (`String`) — A format template
-* args (`Array<Any>`) — Formatting substitutions
+* args (`Array(Any)`) — Formatting substitutions
 
 Returns:
 * (`String`) — A new formatted string
@@ -102,10 +102,10 @@ Returns:
 Substitute the specifiers in `fmt` with `args` and return a new string. It
 supports the `%s`, `%d`, `%x` and `%f` specifiers.
 
-For `%f` it also supports precisions like `vprintf('%.2f', 1.526)`. All
+For `%f` it also supports precisions like `vprintf('%.2f', [1.526])`. All
 specifiers can be prefixed with a minimum field width (e.g.
-`vprintf('%5s', 'foo')`). Unless the width is prefixed with `'0'`, the formatted
-string will be padded with spaces.
+`vprintf('%5s', ['foo'])`). Unless the width is prefixed with `'0'`, the
+formatted string will be padded with spaces.
 
 Example usage:
 
