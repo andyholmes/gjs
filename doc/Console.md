@@ -196,19 +196,6 @@ Logs a message with severity equal to
 
 [gloglevelflagsmessage]: https://gjs-docs.gnome.org/glib20/glib.loglevelflags#default-level_message
 
-### console.setLogDomain(logDomain)
-
-Type:
-* Static
-
-Parameters:
-* logDomain (`String`) — logDomain the GLib log domain this `console` should
-  print with. Defaults to 'Gjs-Console'.
-
-> New in GJS 1.70 (GNOME 41)
-
-Sets the log domain for the `console` object.
-
 ### console.table(tabularData, options)
 
 Type:
@@ -295,15 +282,31 @@ Logs a message with severity equal to
 
 [gloglevelflagswarning]: https://gjs-docs.gnome.org/glib20/glib.loglevelflags#default-level_warning
 
-### console.logDomain
 
-Type:
-* `Boolean`
+## Log Domain
 
 > New in GJS 1.70 (GNOME 41)
 
-A read-only property that returns the GLib log domain this `console` prints
-with. Defaults to `"Gjs-Console"`.
+The log domain for the default global `console` object is set to `"Gjs-Console"`
+by default, but can be changed if necessary. The three symbols of interest are
+`setConsoleLogDomain()`, `getConsoleLogDomain()` and `DEFAULT_LOG_DOMAIN`.
 
-This property can be set with [`console.setLogDomain()`](#console-setlogdomain).
+You can import these symbols and modify the log domain like so:
+
+```js
+import { setConsoleLogDomain, getConsoleLogDomain, DEFAULT_LOG_DOMAIN } from 'console';
+
+// Setting the log domain
+setConsoleLogDomain('my.app.id');
+
+// expected output: my.app.id-Message: 12:21:17.899: cool
+console.log('cool');
+
+// Checking and resetting the log domain
+if (getConsoleLogDomain() !== DEFAULT_LOG_DOMAIN)
+    setConsoleLogDomain(DEFAULT_LOG_DOMAIN);
+
+// expected output: Gjs-Console-Message: 12:21:17.899: cool
+console.log('cool');
+```
 
