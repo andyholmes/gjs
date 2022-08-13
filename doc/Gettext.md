@@ -153,14 +153,16 @@ Returns:
 Translate a string that may or may not be plural, like "I have 1 apple" and
 "I have 2 apples".
 
-In GJS, this should be used in conjunction with `String.prototype.format()`,
+In GJS, this should be used in conjunction with [`Format.vprintf()`][vprintf],
 which supports the same substitutions as `printf()`:
 
 ```js
 const numberOfApples = Math.round(Math.random() + 1);
-const translated = Format.printf(Gettext.ngettext('I have %d apple',
-    'I have %d apples', numberOfApples), numberOfApples);
+const translated = Format.vprintf(Gettext.ngettext('I have %d apple',
+    'I have %d apples', numberOfApples), [numberOfApples]);
 ```
+
+[vprintf]: https://gjs-docs.gnome.org/gjs/format.md#format-vprintf
 
 ### Gettext.dngettext(domainName, msgid1, msgid2, n)
 
