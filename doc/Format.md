@@ -94,7 +94,7 @@ Type:
 
 Parameters:
 * fmt (`String`) — A format template
-* args (`Any`) — Formatting substitutions
+* args (`Array<Any>`) — Formatting substitutions
 
 Returns:
 * (`String`) — A new formatted string
@@ -111,12 +111,12 @@ Example usage:
 
 ```js
 // expected result: "A formatted string"
-const str = Format.vprintf('A %s %s', 'formatted', 'string');
+const str = Format.vprintf('A %s %s', ['formatted', 'string']);
 
 // Usage with Gettext
-Format.vprintf(_('%d:%d'), 11, 59);
+Format.vprintf(_('%d:%d'), [11, 59]);
 Format.vprintf(
-    Gettext.ngettext('I have %d apple', 'I have %d apples', num), num);
+    Gettext.ngettext('I have %d apple', 'I have %d apples', num), [num]);
 ```
 
 [template-literals]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals

@@ -89,12 +89,12 @@ Type:
 * Static
 
 Parameters:
-* item (`Object`) — An item to format generically
+* item (`Object`) — The item to display
 * options (`undefined`) — Additional options for the formatter. Unused in GJS.
 
 > New in GJS 1.70 (GNOME 41)
 
-Logs a list of the properties of `item`.
+Resurively display all properties of `item`.
 
 ### console.dirxml(...data)
 

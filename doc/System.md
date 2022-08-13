@@ -226,7 +226,7 @@ import System from 'system';
 
 const myApp = new Gtk.Application();
 myApp.connect("activate", () => log("activated"));
-myApp.run([System.programInvocationName].concat(ARGV));
+myApp.run([System.programInvocationName, ...ARGV]);
 ```
 
 [example-application]: https://gitlab.gnome.org/GNOME/gjs/blob/HEAD/examples/gtk-application.js

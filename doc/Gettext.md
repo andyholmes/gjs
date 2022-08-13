@@ -158,8 +158,8 @@ which supports the same substitutions as `printf()`:
 
 ```js
 const numberOfApples = Math.round(Math.random() + 1);
-const translated = Gettext.ngettext('I have %d apple', 'I have %d apples',
-    numberOfApples).format(numberOfApples);
+const translated = Format.printf(Gettext.ngettext('I have %d apple',
+    'I have %d apples', numberOfApples), numberOfApples);
 ```
 
 ### Gettext.dngettext(domainName, msgid1, msgid2, n)

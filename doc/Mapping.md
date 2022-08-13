@@ -6,8 +6,7 @@ C or Python developers that are new to GJS.
 
 ## GObject Construction
 
-GObjects can be constructed with the `new` operator, just like JavaScript
-objects, and usually take an `Object` map of properties:
+GObjects can be constructed with the `new` operator, and usually take an `Object` map of properties:
 
 ```js
 const label = new Gtk.Label({
