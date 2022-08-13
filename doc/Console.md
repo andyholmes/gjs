@@ -3,8 +3,12 @@
 GJS implements the [WHATWG Console][whatwg-console] specification, with some
 changes to accommodate GLib.
 
-In particular, some methods that rely on an interactive UI are not implemented
-and log severity is mapped to [`GLib.LogLevelFlags`][gloglevelflags].
+In particular, log severity is mapped to [`GLib.LogLevelFlags`][gloglevelflags]
+and some methods are not implemented:
+
+* `console.profile()`
+* `console.profileEnd()`
+* `console.timeStamp()`
 
 #### Import
 
@@ -192,33 +196,6 @@ Logs a message with severity equal to
 
 [gloglevelflagsmessage]: https://gjs-docs.gnome.org/glib20/glib.loglevelflags#default-level_message
 
-### console.profile(label)
-
-> Deprecated: This is a deprecated method, not implemented by GJS
-
-Type:
-* Static
-
-Parameters:
-* label (`String`) — unique identifier for this action, pass to
-  `console.profileEnd()` to complete
-
-Not implemented.
-
-### console.profileEnd(label)
-
-> Deprecated: This is a deprecated method, not implemented by GJS
-
-Type:
-* Static
-
-Parameters:
-* label (`String`) — unique identifier for this action
-
-> New in GJS 1.70 (GNOME 41)
-
-Not implemented.
-
 ### console.setLogDomain(logDomain)
 
 Type:
@@ -290,20 +267,6 @@ Parameters:
 
 Logs the time since the last call to `console.time(label)` where `label` is the
 same.
-
-### console.timeStamp(label)
-
-> Deprecated: This is a deprecated method, not implemented by GJS
-
-Type:
-* Static
-
-Parameters:
-* label (`String`) — unique identifier for this action
-
-> New in GJS 1.70 (GNOME 41)
-
-Not implemented.
 
 ### console.trace(...data)
 
