@@ -371,7 +371,7 @@ const pspec2 = GObject.ParamSpec.boolean('property2', 'nick', 'blurb',
     true);                        // default value
 ```
 
-### GObject Signal Match
+### GObject Signal Matches
 
 This is an object passed to a number of signal matching functions. It has three
 properties:
@@ -401,6 +401,123 @@ const result = GObject.signal_handler_find(objectInstance, {
 
 console.assert(result === handlerId);
 ```
+
+### GObject.Object.connect(name, callback)
+
+> See also: [GObject Signals Tutorial][gobject-signals-tutorial]
+
+Parameters:
+* name (`String`) — A detailed signal name
+* callback (`Function`) — A callback function
+
+Returns:
+* (`Number`) — A signal handler ID
+
+Connects a callback function to a signal for a particular object.
+
+The first argument of the callback will be the object emitting the signal, while
+the remaining arguments are the signal parameters.
+
+The handler will be called synchronously, before the default handler of the
+signal. `GObject.Object.emit()` will not return control until all handlers are
+called.
+
+For example:
+
+```js
+// A signal connection (emitted when any property changes)
+let handler1 = obj.connect('notify', (obj, pspec) => {
+    log(`${pspec.name} changed on ${obj.constructor.$gtype.name} object`);
+});
+
+// A signal name with detail (emitted when "property-name" changes)
+let handler2 = obj.connect('notify::property-name', (obj, pspec) => {
+    log(`${pspec.name} changed on ${obj.constructor.$gtype.name} object`);
+});
+```
+
+[gobject-signals-tutorial]: https://gjs.guide/guides/gobject/basics.html#signals
+
+### GObject.Object.connect_after(name, callback)
+
+> See also: [GObject Signals Tutorial][gobject-signals-tutorial]
+
+Parameters:
+* name (`String`) — A detailed signal name
+* callback (`Function`) — A callback function
+
+Returns:
+* (`Number`) — A signal handler ID
+
+Connects a callback function to a signal for a particular object.
+
+The first argument of the callback will be the object emitting the signal, while
+the remaining arguments are the signal parameters.
+
+The handler will be called synchronously, after the default handler of the
+signal.
+
+[gobject-signals-tutorial]: https://gjs.guide/guides/gobject/basics.html#signals
+
+### GObject.Object.disconnect(id)
+
+> See also: [GObject Signals Tutorial][gobject-signals-tutorial]
+
+Parameters:
+* id (`Number`) — A signal handler ID
+
+Disconnects a handler from an instance so it will not be called during any
+future or currently ongoing emissions of the signal it has been connected to.
+
+The `id` has to be a valid signal handler ID, connected to a signal of the
+object.
+
+For example:
+
+```js
+let handlerId = obj.connect('notify', (obj, pspec) => {
+    log(`${pspec.name} changed on ${obj.constructor.$gtype.name} object`);
+});
+
+if (handlerId) {
+    obj.disconnect(handlerId);
+    handlerId = null;
+}
+```
+
+[gobject-signals-tutorial]: https://gjs.guide/guides/gobject/basics.html#signals
+
+### GObject.Object.emit(name, ...args)
+
+> See also: [GObject Signals Tutorial][gobject-signals-tutorial]
+
+Parameters:
+* name (`String`) — A detailed signal name
+* args (`Any`) — Signal parameters
+
+Returns:
+* (`Any`|`undefined`) — Optional return value
+
+Emits a signal. Signal emission is done synchronously. The method will only
+return control after all handlers are called or signal emission was stopped.
+
+In some cases, signals expect a return value (usually a `Boolean`). The effect
+of the return value will be described in the documentation for the signal.
+
+For example:
+
+```js
+// Emitting a signal
+obj.emit('signal-name', arg1, arg2);
+
+// Emitting a signal that returns a boolean
+if (obj.emit('signal-name', arg1, arg2))
+    log('signal emission was handled!');
+else
+    log('signal emission was unhandled!');
+```
+
+[gobject-signals-tutorial]: https://gjs.guide/guides/gobject/basics.html#signals
 
 ### GObject.signal_handler_find(instance, match)
 
