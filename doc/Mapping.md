@@ -183,52 +183,53 @@ var MyLabel = GObject.registerClass({
 
 ## GType Objects
 
-> See also: [`GObject.Object.$gtype`](overrides.md#gobject-object-gtype)
+> See also: [`GObject.Object.$gtype`][gobject-gtype] and
+> [`GObject.registerClass()`][gobject-registerclass]
 
 This is the object that represents a type in the GObject type system. Internally
 a GType is an integer, but you can't access that integer in GJS.
 
-The `$gtype` property gives the GType object for the given type. This is the
-proper way to find the GType given an object or a class. For a class,
-`GObject.type_from_name('GtkLabel')` would work too if you know the GType name,
-but only if you had previously constructed a Gtk.Label object.
+The GType object is simple wrapper with two members:
+
+* name (`String`) — A read-only string property, such as `"GObject"`
+* toString() (`Function`) — Returns a string representation of the GType, such
+  as `"[object GType for 'GObject']"`
+
+Generally this object is not useful and better alternatives exist. Whenever a
+GType is expected as an argument, you can simply pass a **constructor object**:
 
 ```js
-log(Gtk.Label.$gtype);
-log(labelInstance.constructor.$gtype);
-// expected output: [object GType for 'GtkLabel']
+// Passing a "constructor object" in place of a GType
+const listInstance = Gio.ListStore.new(Gtk.Widget);
+
+// This also works for GObject.Interface types, such as Gio.ListModel
+const pspec = Gio.ParamSpec.object('list', '', '', GObject.ParamFlags.READABLE,
+    Gio.ListModel);
 ```
 
-The `name` property of GType objects gives the GType name as a string
-('GtkLabel'). This is the proper way to find the type name given an object or a
-class.
-
-User defined subclasses' GType name will be the class name prefixed with
-`Gjs_`by default. If you want to specify your own name, you can pass it as the
-value for the `GTypeName` property to `GObject.registerClass()`. This will be
-relevant in situations such as defining a composite template for a GtkWidget
-subclass.
+To confirm the GType of an object instance, you can just use the standard
+[`instanceof` operator][mdn-instanceof]:
 
 ```js
-log(Gtk.Label.$gtype.name);
-log(labelInstance.constructor.$gtype.name);
-// expected output: GtkLabel
+// Comparing an instance to a "constructor object"
+const objectInstance = new GObject.Object();
 
-log(MyLabel.$gtype.name);
-// expected output: Gjs_MyLabel
+// Comparing an instance to a "constructor object"
+if (objectInstance instanceof GObject.Object)
+    log(true);
+
+// GtkLabel inherits from GObject.Object, so both of these are true
+const labelInstance = new Gtk.Label();
+
+if (labelInstance instance of GObject.Object)
+    log(true);
+
+if (labelInstance instance of Gtk.Label)
+    log(true);
 ```
 
-The standard [`instanceof` operation][mdn-instanceof] can be used to compare an
-object instance to a **constructor object**.
-
-```js
-// expected output: object
-log(typeof labelInstance);
-
-// expected output: true
-log(labelInstance instanceof Gtk.Label);
-```
-
+[gobject-gtype]: https://gjs-docs.gnome.org/gjs/overrides.md#gobject-gtype
+[gobject-registerclass]: https://gjs-docs.gnome.org/gjs/overrides.md#gobject-registerclass
 [mdn-instanceof]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/instanceof
 
 ## Enumerations and Flags

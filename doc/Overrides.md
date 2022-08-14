@@ -281,7 +281,7 @@ for registering subclasses.
 
 ### GObject.Object.$gtype
 
-> Note: This is a property on the constructor object
+> See also: [GType Objects][gtype-objects]
 
 Type:
 * `GObject.Type`
@@ -292,15 +292,17 @@ This is the proper way to find the GType given an object instance or a class.
 For a class, [`GObject.type_from_name()`][gtypefromname] can also be used.
 
 ```js
+// expected output: [object GType for 'GObject']
+
 // GType for an object class
-log(GObject.Object.$gtype);             // [object GType for 'GObject']
+log(GObject.Object.$gtype);
 
 // GType for an object instance
 const objectInstance = GObject.Object.new()
-log(objectInstance.constructor.$gtype); // [object GType for 'GObject']
+log(objectInstance.constructor.$gtype);
 
 // GType from C type name
-log(GObject.type_from_name('GObject')); // [object GType for 'GObject']
+log(GObject.type_from_name('GObject'));
 ```
 
 Note that the GType name for user-defined subclasses will be prefixed with
@@ -308,6 +310,7 @@ Note that the GType name for user-defined subclasses will be prefixed with
 when calling [`GObject.registerClass()`](#gobject-registerclass).
 
 [gtypefromname]: https://gjs-docs.gnome.org/gobject20/gobject.type_from_name
+[gtype-objects]: https://gjs-docs.gnome.org/gjs/mapping.md#gtype-objects
 
 ### GObject.registerClass(metaInfo, klass)
 
